@@ -1,0 +1,13 @@
+# needed to build the virtualenv
+python-dev
+python-pip
+python-virtualenv
+
+# Some dependencies in requirements.txt are listed as repos, so we need the
+# various repo management tools to fetch them
+# mercurial
+
+# Database stuff
+postgresql
+# libpq-dev is needed to build the psycopg2 package in requirements.txt
+libpq-dev
