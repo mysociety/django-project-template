@@ -26,6 +26,7 @@ Vagrant.configure(2) do |config|
 
   # Django dev server
   config.vm.network "forwarded_port", guest: 8000, host: 8000
+  config.vm.network "forwarded_port", guest: 1080, host: 1080
 
   # Give the VM a bit more power to speed things up
   config.vm.provider "virtualbox" do |v|
@@ -42,8 +43,7 @@ Vagrant.configure(2) do |config|
     # Install the packages from conf/packages
     xargs sudo apt-get install -qq -y < conf/packages
     # Install some of the other things we need that are just for dev
-    # ruby-dev for mailcatcher
-    sudo apt-get install -qq -y ruby-dev
+    sudo apt-get install -qq -y ruby-dev libsqlite3-dev build-essential
 
     # Create a postgresql user
     sudo -u postgres psql -c "CREATE USER {{ project_name }} SUPERUSER CREATEDB PASSWORD '{{ project_name }}'"
@@ -51,7 +51,8 @@ Vagrant.configure(2) do |config|
     sudo -u postgres psql -c "CREATE DATABASE {{ project_name }}"
 
     # Install mailcatcher to make dev email development easier
-    sudo gem install --no-rdoc --no-ri mailcatcher
+    sudo gem install --no-rdoc --no-ri --version "< 3" mime-types
+    sudo gem install --no-rdoc --no-ri --conservative mailcatcher
 
     # Run post-deploy actions script to update the virtualenv, install the
     # python packages we need, migrate the db and generate the sass etc
