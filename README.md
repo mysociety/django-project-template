@@ -24,8 +24,7 @@ $ pip install Django
 Now you can create the project (again, replace project_name with the real name):
 
 ```
-$ django-admin.py startproject --template=https://github.com/mysociety/django-project-template/archive/master.zip --extension py,yml,bash,conf-example,yml-example --name Vagrantfile .gitignore-example project_name .
-$ pip install -r requirements.txt
+$ django-admin.py startproject --template=https://github.com/mysociety/django-project-template/archive/master.zip --extension py,yml,bash,conf-example,yml-example --name Vagrantfile,.gitignore-example project_name .
 ```
 
 The project template includes a Vagrantfile to start your development
