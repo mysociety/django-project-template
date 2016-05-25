@@ -1,18 +1,28 @@
+"""{{ project_name }} URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/{{ docs_version }}/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.conf.urls import url, include
+    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
+"""
 from django.conf import settings
+from django.conf.urls import url
 from django.conf.urls.static import static
-from django.conf.urls import patterns, include, url
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 
-urlpatterns = patterns('',
-    # Examples:
-    url(r'^$', '{{ project_name }}.views.home', name='home'),
-    # url(r'^{{ project_name }}/', include('{{ project_name }}.foo.urls')),
+from .views import HomeView
 
-    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    url(r'^admin/', include(admin.site.urls)),
-)
+admin.autodiscover()
 
-urlpatterns += staticfiles_urlpatterns()
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
+urlpatterns = [
+    url(r'^$', HomeView.as_view(), name='home'),
+    url(r'^admin/', admin.site.urls),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
