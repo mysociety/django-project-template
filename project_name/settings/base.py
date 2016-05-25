@@ -196,5 +196,14 @@ CSRF_COOKIE_HTTPONLY = True
 ALLOWED_HOSTS = config.get('ALLOWED_HOSTS', [])
 
 
+# Use mailcatcher in development
+if DEBUG:
+    EMAIL_HOST = '127.0.0.1'
+    EMAIL_HOST_USER = ''
+    EMAIL_HOST_PASSWORD = ''
+    EMAIL_PORT = 1025
+    EMAIL_USE_TLS = False
+
+
 # mySociety-specific settings
 GOOGLE_ANALYTICS_ACCOUNT = config.get('GOOGLE_ANALYTICS_ACCOUNT')
