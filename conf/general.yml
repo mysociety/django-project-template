@@ -10,9 +10,9 @@
 
 {{ project_name|upper }}_DB_HOST: 'localhost'
 {{ project_name|upper }}_DB_PORT: '5432'
-{{ project_name|upper }}_DB_USER: ''
-{{ project_name|upper }}_DB_NAME: ''
-{{ project_name|upper }}_DB_PASS: ''
+{{ project_name|upper }}_DB_USER: '{{ project_name }}'
+{{ project_name|upper }}_DB_NAME: '{{ project_name }}'
+{{ project_name|upper }}_DB_PASS: '{{ project_name }}'
 
 STAGING: '1'
 
@@ -24,5 +24,6 @@ DJANGO_SECRET_KEY: '{{ secret_key }}'
 GOOGLE_ANALYTICS_ACCOUNT: ''
 
 # Be sure to set this in your config for sites where DEBUG is False
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
 ALLOWED_HOSTS:
   - '.example.com'
