@@ -58,7 +58,7 @@ project - you're encouraged to make it better!
 {{ project_name|capfirst }}
 ===========================
 
-http://img.shields.io/badge/installability-gold-ffd700.svg
+[![Installability](http://img.shields.io/badge/installability-gold-ffd700.svg)]()
 
 Put a top-level description of your project here.
 
