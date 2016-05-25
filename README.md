@@ -1,3 +1,5 @@
+[//]: # ({% comment "This weird comment is a hacky way to provide both a README for the template and a template for the README. Markdown will ignore this and Django's templating will ignore everything until the matching endcomment tag." %})
+
 mySociety's Django project template
 ===================================
 
@@ -24,7 +26,7 @@ $ pip install Django
 Now you can create the project (again, replace project_name with the real name):
 
 ```
-$ django-admin.py startproject --template=https://github.com/mysociety/django-project-template/archive/master.zip --extension py,yml,bash,conf-example,yml-example --name Vagrantfile,.gitignore-example project_name .
+$ django-admin.py startproject --template=https://github.com/mysociety/django-project-template/archive/master.zip --extension py,yml,bash,conf-example,yml-example,md --name Vagrantfile project_name .
 ```
 
 The project template includes a Vagrantfile to start your development
@@ -38,12 +40,6 @@ $ vagrant up
 
 (Make a cup of tea, it will take a while)
 
-Git ignores
------------
-You'll want to put a .gitignore in place for (at least) the various files
-mySociety's deployment system creates. There's an example in .gitignore-example
-which you can copy if you wish.
-
 App template
 ------------
 When adding an app, [we have another template for that](https://github.com/mysociety/django-app-template):
@@ -51,3 +47,34 @@ When adding an app, [we have another template for that](https://github.com/mysoc
 ```
 $ ./manage.py startapp --template=https://github.com/mysociety/django-app-template/archive/master.zip app_name
 ```
+
+README Generation
+-----------------
+
+The following Django template will be used to generate a basic README for your
+project - you're encouraged to make it better!
+
+[//]: # ({% endcomment %}you can delete this line, it's a hack from the project template)
+{{ project_name|capfirst }}
+===========================
+
+http://img.shields.io/badge/installability-gold-ffd700.svg
+
+Put a top-level description of your project here.
+
+Local development
+-----------------
+
+This project includes a Vagrantfile to make local development easy.
+Simply run:
+
+    $ vagrant up
+
+To get a fully configured vagrant development environment. The code is
+installed into `/vagrant/{{ project_name }}` inside the VM, and you can run
+the Django dev server with:
+
+    $ source virtualenv-{{ project_name }}/bin/activate
+    $ python manage.py runserver 0.0.0.0:8000
+
+The website will then be running at http://localhost:8000
