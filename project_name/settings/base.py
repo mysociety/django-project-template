@@ -11,9 +11,25 @@ https://docs.djangoproject.com/en/{{ docs_version }}/ref/settings/
 """
 
 import os
+import yaml
 from .paths import *
 
-DEBUG = True
+config = yaml.load(open(os.path.join(PROJECT_ROOT, 'conf', 'general.yml')))
+
+DEBUG = bool(int(config.get('STAGING')))
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': config.get('{{ project_name|upper }}_DB_NAME'),
+        'USER': config.get('{{ project_name|upper }}_DB_USER'),
+        'PASSWORD': config.get('{{ project_name|upper }}_DB_PASS'),
+        'HOST': config.get('{{ project_name|upper }}_DB_HOST'),
+        'PORT': config.get('{{ project_name|upper }}_DB_PORT'),
+    }
+}
+
+SECRET_KEY = config.get('DJANGO_SECRET_KEY')
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -62,6 +78,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 "{{ project_name }}.context_processors.add_settings",
             ],
+            'debug': DEBUG,
         },
     },
 ]
@@ -174,6 +191,10 @@ SESSION_COOKIE_HTTPONLY = True
 CSRF_COOKIE_HTTPONLY = True
 
 
-# Now get the mySociety configuration
+# Allowed hosts
 
-from .mysociety import *
+ALLOWED_HOSTS = config.get('ALLOWED_HOSTS', [])
+
+
+# mySociety-specific settings
+GOOGLE_ANALYTICS_ACCOUNT = config.get('GOOGLE_ANALYTICS_ACCOUNT')
