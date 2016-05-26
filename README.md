@@ -45,7 +45,7 @@ App template
 When adding an app, [we have another template for that](https://github.com/mysociety/django-app-template):
 
 ```
-$ ./manage.py startapp --extensions md --template=https://github.com/mysociety/django-app-template/archive/master.zip app_name
+$ ./manage.py startapp --extension md --template=https://github.com/mysociety/django-app-template/archive/master.zip app_name
 ```
 
 README Generation
